@@ -27,11 +27,11 @@
                         <div class="form-group">
                             <label for="form-structure">{{$field->label}}</label>
                             @if($field->type == "text")
-                                <input value="@php echo $entry->{$field->name} @endphp" type="text" name="{{$field->name}}" class="form-control"/>
+                                <input value="@php echo $entry->{$field->name} @endphp" type="text" name="{{$field->name}}_fb_t" class="form-control"/>
                             @elseif($field->type == "textarea")
-                                <textarea rows="12" name="{{$field->name}}" class="form-control">@php echo $entry->{$field->name} @endphp</textarea>
+                                <textarea rows="12" name="{{$field->name}}_fb_t" class="form-control">@php echo $entry->{$field->name} @endphp</textarea>
                             @elseif($field->type == "file")
-                                <input type="file" name="{{$field->name}}" class="form-control"/>
+                                <input type="file" name="{{$field->name}}_fb_f" class="form-control"/>
                             @endif
                         </div>
                     @endforeach

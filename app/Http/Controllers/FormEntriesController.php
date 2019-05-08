@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class FormEntriesController extends Controller
 {
@@ -36,7 +37,8 @@ class FormEntriesController extends Controller
     function store($form_id, Request $request)
     {
         //TODO: Have a way to validate the dynamic data
-        $jsonData = json_encode($request->except('_token'));
+        $jsonData = $this->parseFormData($request->except('_token'),$form_id,$request);
+
         DB::table('form_entries')->insert(
                 ['form_id' => $form_id,'data'=>$jsonData,'created_at'=>date("Y-m-d H:i:s"),'updated_at'=>date("Y-m-d H:i:s")]
         );
@@ -59,7 +61,7 @@ class FormEntriesController extends Controller
     function update($form_id, $entry_id, Request $request)
     {
         //TODO: Have a way to validate the dynamic data
-        $jsonData = json_encode($request->except('_token','_method'));
+        $jsonData = $this->parseFormData($request->except('_token','_method'),$form_id,$request);
         DB::table('form_entries')->where('form_id',$form_id)->where('id',$entry_id)->update(
                 ['form_id' => $form_id,'data'=>$jsonData,'updated_at'=>date("Y-m-d H:i:s")]
         );
@@ -72,5 +74,22 @@ class FormEntriesController extends Controller
         DB::table('form_entries')->where('id', $entry_id)->where('form_id',$form_id)->delete();
         $request->session()->flash('status', 'Entry deleted!');
         return redirect('entries/'.$form_id);
+    }
+
+    function parseFormData($data,$form_id,$request)
+    {
+        $inputArray = array();
+        foreach($data as $key => $value) {
+            $formKey = $key;
+            $key = explode("_fb",$formKey);
+            $path = "";
+            //Check if the form entry is a file.
+            if($key[1] == "_f") {
+                $request->hasFile($formKey) ? $path = $request->file($formKey)->store('files/'.$form_id) : $path = "";
+                $inputArray[$key[0]] = $path;
+            } else
+                $inputArray[$key[0]] = $value;
+        }
+        return json_encode($inputArray);
     }
 }
