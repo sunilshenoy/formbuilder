@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'FormBuilderController@index')->name('home');
+
+/*Form Builder*/
+Route::get('/create', 'FormBuilderController@create')->name('formbuilder.create');
+Route::post('/create', 'FormBuilderController@store')->name('formbuilder.store');
