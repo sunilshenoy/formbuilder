@@ -37,12 +37,26 @@ You will need to install Composer, PHP. Also have a way to configure virtual hos
 
 1. Update frontend to use React.js
 2. Validation for dynamic form field entries.
-2. Unit tests for functions.
-4. File storage.
+3. Unit tests for functions.
+
 
 ## Not sure
 
 I was not sure what "menu" type is. Have not considered that as a form input type as part of the current solution.
+
+
+## File Storage
+
+- Uses the default local disk for file storage. i.e storage/app folder.
+
+- I am using form field name hack to distinguish text from file. This might not be the best way and might break if form being created uses ```_fb_t``` or ```_fb_f``` in their name.
+
+```Known Issue with File Storage```
+
+- Tested with small file size only.
+
+- Editing the form entry resets the file data. Was not able to get to it due to time limitation. :(
+
 
 ## Thoughts
 
@@ -55,6 +69,7 @@ I was not sure what "menu" type is. Have not considered that as a form input typ
 - I have avoided using sub views as there were not a lot of views in the project as of now.
 
 - I have avoided using React for now, because I would not be able to complete this task across frontend considering the time constraint.
+
 
 - Enjoyed working on this task :)
 
