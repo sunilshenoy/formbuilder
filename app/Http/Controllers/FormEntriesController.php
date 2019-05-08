@@ -14,6 +14,12 @@ class FormEntriesController extends Controller
         $this->middleware('auth');
 
     }
+
+    /**
+     * List entries for a particular dynamic form
+     *
+     */
+
     function index($form_id)
     {
         if(isset($form_id)) {
@@ -24,6 +30,12 @@ class FormEntriesController extends Controller
             return view('/home');
 
     }
+
+    /**
+     * Create a new form entry method.
+     *
+     */
+
     function create($form_id)
     {
         $formDetails = DB::table('forms')->where('id',$form_id);
@@ -34,6 +46,12 @@ class FormEntriesController extends Controller
         }
 
     }
+
+    /**
+     * Store a new form entry
+     *
+     */
+
     function store($form_id, Request $request)
     {
         //TODO: Have a way to validate the dynamic data
@@ -44,6 +62,12 @@ class FormEntriesController extends Controller
         );
         return redirect('entries/'.$form_id);
     }
+
+    /**
+     * Edit a particular form entry
+     *
+     */
+
     function edit($form_id, $entry_id)
     {
         $formDetails = DB::table('forms')->where('id',$form_id);
@@ -58,6 +82,11 @@ class FormEntriesController extends Controller
         }
     }
 
+    /**
+     * Update a particular form entry
+     *
+     */
+
     function update($form_id, $entry_id, Request $request)
     {
         //TODO: Have a way to validate the dynamic data
@@ -67,6 +96,11 @@ class FormEntriesController extends Controller
         );
         return redirect('entries/'.$form_id);
     }
+
+    /**
+     * Delete form entry
+     *
+     */
 
     function delete($form_id, $entry_id, Request $request)
     {

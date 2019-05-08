@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class FormBuilderController extends Controller
 {
-    /**
-     * List forms created.
-     */
-
     public function __construct()
     {
         $this->middleware('auth');
     }
+
+    /**
+     * List forms created.
+     */
 
     function index()
     {
@@ -25,13 +25,19 @@ class FormBuilderController extends Controller
         return view('builder/index',['forms'=>$dynamicForms]);
     }
 
-    //Create new dynamic form
+    /**
+     * Create new dynamic form
+     */
+
     function create()
     {
         return view('builder/create');
     }
 
-    // Store the new dynamic form
+    /**
+     * Store the new dynamic form data
+     */
+
     function store(Request $request)
     {
         //Validate the form entry
