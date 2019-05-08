@@ -26,7 +26,10 @@
                         <tbody>
                             @foreach($entries as $entry)
                                 <tr>
-                                <td>{{$entry->data}}</td>
+                                <td>{{$entry->data}}<br/>
+                                <small class="form-text text-muted">Created: {{date("F jS Y H:i:s",strtotime($entry->created_at))}}</span>
+                                <small class="form-text text-muted">Updated: {{date("F jS Y H:i:s",strtotime($entry->updated_at))}}</span>
+                                </td>
                                 <td><a href="/entries/{{$form[0]->id}}/edit/{{$entry->id}}">Edit</a> |
                                 <a data-method="delete" style="cursor:pointer;" onclick="$(this).find('form').submit();">Delete
                                     <form action="/entries/{{$form[0]->id}}/delete/{{$entry->id}}" method="POST" name="delete_item" style="display:none">
