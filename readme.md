@@ -27,6 +27,7 @@ You will need to install Composer, PHP. Also have a way to configure virtual hos
 1. Create dynamic form using json structure.
 2. Dynamic form starts with a default JSON structure.
 3. You can add edit, view, delete entries to these dynamic forms created.
+4. You can upload files from the dynamic form.
 
 ## Structure
 
@@ -51,11 +52,11 @@ I was not sure what "menu" type is. Have not considered that as a form input typ
 
 - I am using form field name hack to distinguish text from file. This might not be the best way and might break if form being created uses ```_fb_t``` or ```_fb_f``` in their name.
 
-```Known Issue with File Storage```
+```Known Issues with File Storage```
 
 - Tested with small file size only.
 
-- Editing the form entry resets the file data. Was not able to get to it due to time limitation. :(
+- Editing the form entry resets the file data. Was not able to get to it due to time :(
 
 
 ## Thoughts
